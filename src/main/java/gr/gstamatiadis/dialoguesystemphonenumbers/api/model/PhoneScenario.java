@@ -7,13 +7,13 @@ import lombok.Setter;
 @Setter
 public class PhoneScenario {
 
-    String phoneScenario;
+    String possiblePhone;
     Boolean isValidGreekPhone;
 
 
     public PhoneScenario(String phoneScenario , Boolean isValidGreekPhone){
 
-        this.phoneScenario = phoneScenario;
+        this.possiblePhone = phoneScenario;
         this.isValidGreekPhone = isValidGreekPhone;
     }
 

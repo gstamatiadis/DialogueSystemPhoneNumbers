@@ -62,7 +62,7 @@ public class GroupDigitsLength3Handler {
             possibleScenariosForI.add(removedLast2Characters);
             addNewScenarios(possibleScenariosForI);
 
-            ScenariosForDigitGroupings scenariosI = groupDigitsLength2Handler.handleLength2(commonGroupDigitsHelper.getLast2Characters(groupDigitsI), groupDigitsIPlus1);
+            ScenariosForDigitGroupings scenariosI = groupDigitsLength2Handler.scenariosNotEndsWithZero(commonGroupDigitsHelper.getLast2Characters(groupDigitsI));
             int groupsCovered = scenariosI.getDigitGroupingsCovered();
 
             // The scenarios covered are the ones returned by handleLength2 method plus 1 (the scenarios for group Digits i)

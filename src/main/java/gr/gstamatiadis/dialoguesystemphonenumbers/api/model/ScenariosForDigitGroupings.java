@@ -1,7 +1,12 @@
 package gr.gstamatiadis.dialoguesystemphonenumbers.api.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import java.util.List;
 
+@Getter
+@Setter
 public class ScenariosForDigitGroupings {
     List<String> scenarios;
     int digitGroupingsCovered;
@@ -11,20 +16,5 @@ public class ScenariosForDigitGroupings {
         this.digitGroupingsCovered = digitGroupingsCovered;
     }
 
-    public List<String> getScenarios() {
-        return scenarios;
-    }
-
-    public void setScenarios(List<String> scenarios) {
-        this.scenarios = scenarios;
-    }
-
-    public int getDigitGroupingsCovered() {
-        return digitGroupingsCovered;
-    }
-
-    public void setDigitGroupingsCovered(int digitGroupingsCovered) {
-        this.digitGroupingsCovered = digitGroupingsCovered;
-    }
 }
 

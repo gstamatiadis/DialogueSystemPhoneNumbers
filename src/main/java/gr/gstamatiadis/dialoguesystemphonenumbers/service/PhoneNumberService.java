@@ -15,9 +15,9 @@ public class PhoneNumberService {
 
     static List<String> possibleScenarios = Collections.singletonList("");
 
-    private DangerOfOutOfBoundHandler dangerOfOutOfBoundHandler;
-    private GroupDigitsLength3Handler groupDigitsLength3Handler;
-    private GroupDigitsLength2Handler groupDigitsLength2Handler;
+    private final DangerOfOutOfBoundHandler dangerOfOutOfBoundHandler;
+    private final GroupDigitsLength3Handler groupDigitsLength3Handler;
+    private final GroupDigitsLength2Handler groupDigitsLength2Handler;
 
     @Autowired
     public PhoneNumberService(DangerOfOutOfBoundHandler dangerOfOutOfBoundHandler, GroupDigitsLength3Handler groupDigitsLength3Handler, GroupDigitsLength2Handler groupDigitsLength2Handler) {
@@ -30,36 +30,40 @@ public class PhoneNumberService {
     public List<String> getAllPossibleScenarios(String phoneNumber) {
 
 
-        String[] arrOfStr = phoneNumber.split(" ");
+        String[] arrOfGroupDigits = phoneNumber.split(" ");
 
-        for (int i = 0; i < arrOfStr.length; i++) {
+        // variable i is the iterator that counts how many group digits were processed
+        int i = 0;
+        int groupDigits = arrOfGroupDigits.length;
+
+        while (i < groupDigits) {
 
 
-            if (arrOfStr[i].length() == 2 && (i + 1) < arrOfStr.length) {
-                ScenariosForDigitGroupings scenariosI = groupDigitsLength2Handler.handleLength2(arrOfStr[i], arrOfStr[i + 1]);
+            if (arrOfGroupDigits[i].length() == 2 && (i + 1) < arrOfGroupDigits.length) {
+                ScenariosForDigitGroupings scenariosI = groupDigitsLength2Handler.handleLength2(arrOfGroupDigits[i], arrOfGroupDigits[i + 1]);
                 addNewScenarios(scenariosI.getScenarios());
 
-                //For example if we have covered the scenarios of three digit groups then we add 2 to the iterator to start from the next unchecked digit grouping
-                i += scenariosI.getDigitGroupingsCovered() - 1;
-            } else if (arrOfStr[i].length() == 3 && (i + 2) < arrOfStr.length) {
-                ScenariosForDigitGroupings scenariosI = groupDigitsLength3Handler.handleLength3(arrOfStr[i], arrOfStr[i + 1], arrOfStr[i + 2]);
+
+                i += scenariosI.getDigitGroupingsCovered();
+            } else if (arrOfGroupDigits[i].length() == 3 && (i + 2) < arrOfGroupDigits.length) {
+                ScenariosForDigitGroupings scenariosI = groupDigitsLength3Handler.handleLength3(arrOfGroupDigits[i], arrOfGroupDigits[i + 1], arrOfGroupDigits[i + 2]);
 
                 addNewScenarios(scenariosI.getScenarios());
 
-                //For example if we have covered the scenarios of three digit groups then we add 2 to the iterator to start from the next unchecked digit grouping
-                i += scenariosI.getDigitGroupingsCovered() - 1;
+                i += scenariosI.getDigitGroupingsCovered();
 
-            } else if (dangerOfOutOfBoundHandler.isDangerOutOfBounds(arrOfStr.length, arrOfStr[i].length(), i)) {
+            } else if (dangerOfOutOfBoundHandler.isDangerOutOfBounds(arrOfGroupDigits.length, arrOfGroupDigits[i].length(), i)) {
 
-                ScenariosForDigitGroupings scenariosI = dangerOfOutOfBoundHandler.handleDangerOutOfBoundsCases(arrOfStr, i);
+                ScenariosForDigitGroupings scenariosI = dangerOfOutOfBoundHandler.handleDangerOutOfBoundsCases(arrOfGroupDigits, i);
                 addNewScenarios(scenariosI.getScenarios());
 
-                //For example if we have covered the scenarios of three digit groups then we add 2 to the iterator to start from the next unchecked digit grouping
-                i += scenariosI.getDigitGroupingsCovered() - 1;
+                i += scenariosI.getDigitGroupingsCovered();
 
             } else {
 
-                addNewScenarios(Collections.singletonList(arrOfStr[i]));
+                addNewScenarios(Collections.singletonList(arrOfGroupDigits[i]));
+
+                i += 1;
 
             }
         }
