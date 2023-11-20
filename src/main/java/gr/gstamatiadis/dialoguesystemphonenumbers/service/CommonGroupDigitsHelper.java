@@ -1,8 +1,13 @@
 package gr.gstamatiadis.dialoguesystemphonenumbers.service;
 
+import lombok.NoArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Component
+@NoArgsConstructor
 public class CommonGroupDigitsHelper {
 
     protected  boolean isNotPhoneticallyUniqueNumber(String s) {
@@ -21,4 +26,21 @@ public class CommonGroupDigitsHelper {
         return string.substring(string.length() - 2);
     }
 
+
+    protected List<String> combineGroupDigitsScenarios(List<String> pastGroupDigitsScenarios, List<String> presentGroupDigitsScenarios ) {
+        //Combining the scenarios until now with the scenarios of digit grouping i
+
+        List<String> combinedScenarios = new ArrayList<>();
+
+        for (String scenarioUntilI : pastGroupDigitsScenarios) {
+            for (String scenarioI : presentGroupDigitsScenarios) {
+
+                combinedScenarios.add(scenarioUntilI + scenarioI);
+
+            }
+
+        }
+
+        return combinedScenarios;
+    }
 }

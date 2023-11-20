@@ -1,6 +1,7 @@
 package gr.gstamatiadis.dialoguesystemphonenumbers.service;
 
 import gr.gstamatiadis.dialoguesystemphonenumbers.api.model.ScenariosForDigitGroupings;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -8,13 +9,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
+@NoArgsConstructor
 public class GroupDigitsLength2Handler {
 
     private CommonGroupDigitsHelper commonGroupDigitsHelper;
 
 
-    public GroupDigitsLength2Handler() {
-    }
+
 
     @Autowired
     public GroupDigitsLength2Handler(CommonGroupDigitsHelper commonGroupDigitsHelper) {

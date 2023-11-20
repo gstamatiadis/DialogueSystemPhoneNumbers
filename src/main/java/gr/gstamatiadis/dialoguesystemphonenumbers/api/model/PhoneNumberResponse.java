@@ -8,9 +8,9 @@ import java.util.List;
 @Getter
 @Setter
 public class PhoneNumberResponse {
-    List<String> allScenarios;
+    List<PhoneScenario> allScenarios;
 
-    public PhoneNumberResponse(List<String> allScenarios ){
+    public PhoneNumberResponse(List<PhoneScenario> allScenarios ){
         this.allScenarios = allScenarios;
     }
 }

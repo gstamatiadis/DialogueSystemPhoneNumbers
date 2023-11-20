@@ -1,6 +1,7 @@
 package gr.gstamatiadis.dialoguesystemphonenumbers.service;
 
 import gr.gstamatiadis.dialoguesystemphonenumbers.api.model.ScenariosForDigitGroupings;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -8,9 +9,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static gr.gstamatiadis.dialoguesystemphonenumbers.service.PhoneNumberService.addNewScenarios;
+
 
 @Component
+@NoArgsConstructor
 public class DangerOfOutOfBoundHandler {
 
 
@@ -18,8 +20,7 @@ public class DangerOfOutOfBoundHandler {
     private  GroupDigitsLength3Handler groupDigitsLength3Handler;
     private  GroupDigitsLength2Handler groupDigitsLength2Handler;
 
-    public DangerOfOutOfBoundHandler() {
-    }
+
     @Autowired
     public DangerOfOutOfBoundHandler(CommonGroupDigitsHelper commonGroupDigitsHelper, GroupDigitsLength3Handler groupDigitsLength3Handler,GroupDigitsLength2Handler groupDigitsLength2Handler){
         this.commonGroupDigitsHelper = commonGroupDigitsHelper;
@@ -55,9 +56,14 @@ public class DangerOfOutOfBoundHandler {
         possibleScenariosForLast.add(commonGroupDigitsHelper.removeLast2Characters(length3LastElement) + "00");
         String removedLast2Characters = commonGroupDigitsHelper.removeLast2Characters(length3LastElement);
         possibleScenariosForLast.add(removedLast2Characters);
-        addNewScenarios(possibleScenariosForLast);
 
-        return handleLength2LastElement(commonGroupDigitsHelper.getLast2Characters(length3LastElement));
+        ScenariosForDigitGroupings scenariosLast = handleLength2LastElement(commonGroupDigitsHelper.getLast2Characters(length3LastElement));
+
+        List<String> combinedScenarios = commonGroupDigitsHelper.combineGroupDigitsScenarios(possibleScenariosForLast, scenariosLast.getScenarios());
+        scenariosLast.setScenarios(combinedScenarios);
+
+
+        return scenariosLast;
 
     }
 
@@ -77,12 +83,15 @@ public class DangerOfOutOfBoundHandler {
                 possibleScenariosForSecondLast.add(commonGroupDigitsHelper.removeLast2Characters(length3SecondToLastElement) + "00");
                 String removedLast2Characters = commonGroupDigitsHelper.removeLast2Characters(length3SecondToLastElement);
                 possibleScenariosForSecondLast.add(removedLast2Characters);
-                addNewScenarios(possibleScenariosForSecondLast);
+
                 ScenariosForDigitGroupings scenariosLast = handleLength2LastElement(lastElement);
                 int groupsCovered = scenariosLast.getDigitGroupingsCovered() + 1;
 
                 // The scenarios covered are the ones returned by handleLength2 method plus 1 (the scenarios for group Digits i)
                 scenariosLast.setDigitGroupingsCovered(groupsCovered);
+
+                List<String> combinedScenarios = commonGroupDigitsHelper.combineGroupDigitsScenarios(possibleScenariosForSecondLast, scenariosLast.getScenarios());
+                scenariosLast.setScenarios(combinedScenarios);
                 return scenariosLast;
             } else {
                 return new ScenariosForDigitGroupings(Collections.singletonList(length3SecondToLastElement), 1);
@@ -92,7 +101,7 @@ public class DangerOfOutOfBoundHandler {
         }
         // if the 3 length group doesn't end with 00 then there is no danger of out of bounds and no need for the i+2 group
         //So we can use the handleLength3 without the i+2 group
-        return groupDigitsLength3Handler.handleLength3(length3SecondToLastElement, lastElement, null);
+        return groupDigitsLength3Handler.handleLength3NotEndsWithDoubleZero(length3SecondToLastElement, lastElement);
     }
 
 
