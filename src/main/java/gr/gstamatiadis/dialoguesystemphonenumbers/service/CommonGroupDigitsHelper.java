@@ -10,11 +10,11 @@ import java.util.List;
 @NoArgsConstructor
 public class CommonGroupDigitsHelper {
 
-    protected  boolean isNotPhoneticallyUniqueNumber(String s) {
+    protected boolean isNotPhoneticallyUniqueNumber(String s) {
         return !s.equals("11") && !s.equals("12");
     }
 
-    protected  String replaceFinalDigit(String currentDigits, String nextDigits) {
+    protected String replaceFinalDigit(String currentDigits, String nextDigits) {
         return currentDigits.substring(0, currentDigits.length() - 1) + nextDigits;
     }
 
@@ -27,7 +27,7 @@ public class CommonGroupDigitsHelper {
     }
 
 
-    protected List<String> combineGroupDigitsScenarios(List<String> pastGroupDigitsScenarios, List<String> presentGroupDigitsScenarios ) {
+    protected List<String> combineGroupDigitsScenarios(List<String> pastGroupDigitsScenarios, List<String> presentGroupDigitsScenarios) {
         //Combining the scenarios until now with the scenarios of digit grouping i
 
         List<String> combinedScenarios = new ArrayList<>();

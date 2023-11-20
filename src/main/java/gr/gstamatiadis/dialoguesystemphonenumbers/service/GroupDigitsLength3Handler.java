@@ -32,7 +32,7 @@ public class GroupDigitsLength3Handler {
             return scenariosEndsWithDoubleZero(groupDigitsI, groupDigitsIPlus1, groupDigitsIPlus2);
         }
 
-            return handleLength3NotEndsWithDoubleZero(groupDigitsI,groupDigitsIPlus1);
+        return handleLength3NotEndsWithDoubleZero(groupDigitsI, groupDigitsIPlus1);
     }
 
     protected ScenariosForDigitGroupings handleLength3NotEndsWithDoubleZero(String groupDigitsI, String groupDigitsIPlus1) {

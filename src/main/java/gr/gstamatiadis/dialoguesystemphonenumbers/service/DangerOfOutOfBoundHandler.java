@@ -10,19 +10,18 @@ import java.util.Collections;
 import java.util.List;
 
 
-
 @Component
 @NoArgsConstructor
 public class DangerOfOutOfBoundHandler {
 
 
-    private  CommonGroupDigitsHelper commonGroupDigitsHelper;
-    private  GroupDigitsLength3Handler groupDigitsLength3Handler;
-    private  GroupDigitsLength2Handler groupDigitsLength2Handler;
+    private CommonGroupDigitsHelper commonGroupDigitsHelper;
+    private GroupDigitsLength3Handler groupDigitsLength3Handler;
+    private GroupDigitsLength2Handler groupDigitsLength2Handler;
 
 
     @Autowired
-    public DangerOfOutOfBoundHandler(CommonGroupDigitsHelper commonGroupDigitsHelper, GroupDigitsLength3Handler groupDigitsLength3Handler,GroupDigitsLength2Handler groupDigitsLength2Handler){
+    public DangerOfOutOfBoundHandler(CommonGroupDigitsHelper commonGroupDigitsHelper, GroupDigitsLength3Handler groupDigitsLength3Handler, GroupDigitsLength2Handler groupDigitsLength2Handler) {
         this.commonGroupDigitsHelper = commonGroupDigitsHelper;
         this.groupDigitsLength3Handler = groupDigitsLength3Handler;
         this.groupDigitsLength2Handler = groupDigitsLength2Handler;
@@ -67,7 +66,7 @@ public class DangerOfOutOfBoundHandler {
 
     }
 
-    private  ScenariosForDigitGroupings handleLength3SecondToLastElement(String length3SecondToLastElement, String lastElement) {
+    private ScenariosForDigitGroupings handleLength3SecondToLastElement(String length3SecondToLastElement, String lastElement) {
         List<String> possibleScenariosForSecondLast = new ArrayList<>();
         if (length3SecondToLastElement.endsWith("00")) {
             if (lastElement.length() == 1) {
@@ -105,7 +104,7 @@ public class DangerOfOutOfBoundHandler {
     }
 
 
-    private  ScenariosForDigitGroupings handleLength2LastElement(String currentDigits) {
+    private ScenariosForDigitGroupings handleLength2LastElement(String currentDigits) {
 
         if (currentDigits.endsWith("0")) {
             return new ScenariosForDigitGroupings(Collections.singletonList(currentDigits), 1);

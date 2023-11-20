@@ -15,7 +15,6 @@ import java.util.List;
 public class PhoneNumberService {
 
 
-
     private final DangerOfOutOfBoundHandler dangerOfOutOfBoundHandler;
     private final GroupDigitsLength3Handler groupDigitsLength3Handler;
     private final GroupDigitsLength2Handler groupDigitsLength2Handler;
@@ -23,7 +22,7 @@ public class PhoneNumberService {
     private final ValidateGreekPhoneNumber validateGreekPhoneNumber;
 
     @Autowired
-    public PhoneNumberService(DangerOfOutOfBoundHandler dangerOfOutOfBoundHandler, GroupDigitsLength3Handler groupDigitsLength3Handler, GroupDigitsLength2Handler groupDigitsLength2Handler, ValidateGreekPhoneNumber validateGreekPhoneNumber,CommonGroupDigitsHelper commonGroupDigitsHelper) {
+    public PhoneNumberService(DangerOfOutOfBoundHandler dangerOfOutOfBoundHandler, GroupDigitsLength3Handler groupDigitsLength3Handler, GroupDigitsLength2Handler groupDigitsLength2Handler, ValidateGreekPhoneNumber validateGreekPhoneNumber, CommonGroupDigitsHelper commonGroupDigitsHelper) {
         this.dangerOfOutOfBoundHandler = dangerOfOutOfBoundHandler;
         this.groupDigitsLength3Handler = groupDigitsLength3Handler;
         this.groupDigitsLength2Handler = groupDigitsLength2Handler;
@@ -47,21 +46,21 @@ public class PhoneNumberService {
 
             if (arrOfGroupDigits[i].length() == 2 && (i + 1) < arrOfGroupDigits.length) {
                 ScenariosForDigitGroupings scenariosI = groupDigitsLength2Handler.handleLength2(arrOfGroupDigits[i], arrOfGroupDigits[i + 1]);
-                possibleScenarios = commonGroupDigitsHelper.combineGroupDigitsScenarios(possibleScenarios,scenariosI.getScenarios());
+                possibleScenarios = commonGroupDigitsHelper.combineGroupDigitsScenarios(possibleScenarios, scenariosI.getScenarios());
 
 
                 i += scenariosI.getDigitGroupingsCovered();
             } else if (arrOfGroupDigits[i].length() == 3 && (i + 2) < arrOfGroupDigits.length) {
                 ScenariosForDigitGroupings scenariosI = groupDigitsLength3Handler.handleLength3(arrOfGroupDigits[i], arrOfGroupDigits[i + 1], arrOfGroupDigits[i + 2]);
 
-                possibleScenarios = commonGroupDigitsHelper.combineGroupDigitsScenarios(possibleScenarios,scenariosI.getScenarios());
+                possibleScenarios = commonGroupDigitsHelper.combineGroupDigitsScenarios(possibleScenarios, scenariosI.getScenarios());
 
                 i += scenariosI.getDigitGroupingsCovered();
 
             } else if (dangerOfOutOfBoundHandler.isDangerOutOfBounds(arrOfGroupDigits.length, arrOfGroupDigits[i].length(), i)) {
 
                 ScenariosForDigitGroupings scenariosI = dangerOfOutOfBoundHandler.handleDangerOutOfBoundsCases(arrOfGroupDigits, i);
-                possibleScenarios = commonGroupDigitsHelper.combineGroupDigitsScenarios(possibleScenarios,scenariosI.getScenarios());
+                possibleScenarios = commonGroupDigitsHelper.combineGroupDigitsScenarios(possibleScenarios, scenariosI.getScenarios());
 
                 i += scenariosI.getDigitGroupingsCovered();
 
@@ -75,13 +74,9 @@ public class PhoneNumberService {
         }
 
 
-
         return validateGreekPhoneNumber.validateAllPhoneScenarios(possibleScenarios);
 
     }
-
-
-
 
 
 }

@@ -10,7 +10,7 @@ import java.util.List;
 public class PhoneNumberResponse {
     List<PhoneScenario> allScenarios;
 
-    public PhoneNumberResponse(List<PhoneScenario> allScenarios ){
+    public PhoneNumberResponse(List<PhoneScenario> allScenarios) {
         this.allScenarios = allScenarios;
     }
 }

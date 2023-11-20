@@ -20,16 +20,16 @@ public class PhoneNumberController {
     private final PhoneNumberService phoneNumberService;
 
     @Autowired
-    public PhoneNumberController(PhoneNumberService phoneNumberService){
+    public PhoneNumberController(PhoneNumberService phoneNumberService) {
         this.phoneNumberService = phoneNumberService;
     }
 
 
     @GetMapping("/getPhoneScenarios")
-    public ResponseEntity<PhoneNumberResponse> getAllScenarios( @RequestParam @Size(min = 2,max=50) @Pattern(regexp = "[0-9 ]+")   String phoneNumber){
+    public ResponseEntity<PhoneNumberResponse> getAllScenarios(@RequestParam @Size(min = 1, max = 50) @Pattern(regexp = "[0-9 ]+", message = "Only numbers and spaces are allowed") String phoneNumber) {
 
 
-        return ResponseEntity.ok( phoneNumberService.getAllPossibleScenarios(phoneNumber));
+        return ResponseEntity.ok(phoneNumberService.getAllPossibleScenarios(phoneNumber));
     }
 
 

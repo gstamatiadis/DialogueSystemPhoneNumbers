@@ -15,8 +15,6 @@ public class GroupDigitsLength2Handler {
     private CommonGroupDigitsHelper commonGroupDigitsHelper;
 
 
-
-
     @Autowired
     public GroupDigitsLength2Handler(CommonGroupDigitsHelper commonGroupDigitsHelper) {
         this.commonGroupDigitsHelper = commonGroupDigitsHelper;

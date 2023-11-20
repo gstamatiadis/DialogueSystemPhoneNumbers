@@ -13,7 +13,7 @@ import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
- class GroupDigitsLength2HandlerTest {
+class GroupDigitsLength2HandlerTest {
 
     @Mock
     private CommonGroupDigitsHelper commonGroupDigitsHelper;
@@ -56,7 +56,6 @@ import static org.mockito.Mockito.when;
         when(commonGroupDigitsHelper.isNotPhoneticallyUniqueNumber("52")).thenReturn(true);
         when(commonGroupDigitsHelper.replaceFinalDigit("50", "2")).thenReturn("52");
         ScenariosForDigitGroupings scenarios = groupDigitsLength2Handler.handleLength2("50", "2");
-
 
 
         Assertions.assertAll("Test handleLength2 where group digit ends with zero is not phonetically unique and next group has length 1",
