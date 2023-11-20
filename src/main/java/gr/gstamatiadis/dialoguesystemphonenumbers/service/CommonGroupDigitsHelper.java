@@ -28,7 +28,7 @@ public class CommonGroupDigitsHelper {
 
 
     protected List<String> combineGroupDigitsScenarios(List<String> pastGroupDigitsScenarios, List<String> presentGroupDigitsScenarios) {
-        //Combining the scenarios until now with the scenarios of digit grouping i
+        //Combining the scenarios we have until now, with the scenarios of digit grouping i
 
         List<String> combinedScenarios = new ArrayList<>();
 

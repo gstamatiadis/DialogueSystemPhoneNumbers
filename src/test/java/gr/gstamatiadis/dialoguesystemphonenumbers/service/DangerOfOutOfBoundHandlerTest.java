@@ -8,7 +8,6 @@ import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Arrays;
@@ -23,13 +22,10 @@ class DangerOfOutOfBoundHandlerTest {
 
     @Mock
     private CommonGroupDigitsHelper commonGroupDigitsHelper;
-    @Mock
-    private GroupDigitsLength3Handler groupDigitsLength3Handler;
+
     @Mock
     private GroupDigitsLength2Handler groupDigitsLength2Handler;
 
-    @Mock
-    private List<String> mockList;
 
     @InjectMocks
     private DangerOfOutOfBoundHandler dangerOfOutOfBoundHandler;

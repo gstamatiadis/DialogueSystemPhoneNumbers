@@ -7,7 +7,6 @@ import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -66,16 +65,16 @@ class CommonGroupDigitsHelperTest {
     void testCombineGroupDigitsScenarios() {
         List<String> previousScenarios = Arrays.asList("1", "2");
         List<String> presentScenarios = Arrays.asList("3", "4");
-        ;
+
 
         List<String> combiinedList = commonGroupDigitsHelper.combineGroupDigitsScenarios(previousScenarios, presentScenarios);
 
-        Assertions.assertAll("Test IsNotPhoneticallyUniqueNumber method ",
+        Assertions.assertAll("Test combineGroupDigitsScenarios method ",
 
                 () -> Assertions.assertEquals("13", combiinedList.get(0), "the first digit combination is between 1 and 3 so 13"),
-                () -> Assertions.assertEquals("14", combiinedList.get(1), "the first digit combination is between 1 and 3 so 14"),
-                () -> Assertions.assertEquals("23", combiinedList.get(2), "the first digit combination is between 1 and 3 so 23"),
-                () -> Assertions.assertEquals("24", combiinedList.get(3), "the first digit combination is between 1 and 3 so 24")
+                () -> Assertions.assertEquals("14", combiinedList.get(1), "the second digit combination is between 1 and 4 so 14"),
+                () -> Assertions.assertEquals("23", combiinedList.get(2), "the third digit combination is between 2 and 3 so 23"),
+                () -> Assertions.assertEquals("24", combiinedList.get(3), "the forth digit combination is between 2 and 4 so 24")
         );
 
     }
